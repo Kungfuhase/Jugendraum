@@ -72,7 +72,7 @@ def check_vert (board,player_symbol):
     return won
 
 
-def check_diag (board,player): #bug bei reversed liste die übergeben wird (Dafuq)
+def check_diag (board,player): #BUG reversed Liste die übergeben wird bei aufrum in check_main  (Dafuq)
     board_infunc = board.copy()
     board_infunc.reverse()
     packs = []
