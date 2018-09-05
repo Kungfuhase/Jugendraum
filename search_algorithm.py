@@ -9,7 +9,7 @@ def search_word_txt(file, words):
             while not done:
                 if word in file[i][start_i:]:
                     index = file[i].find(word, start_i)
-                    indices.append(('Row: ' + str(i+1) + ' ', 'index: ' + str(index) + ' ','word: '+ word + ' '))
+                    indices.append(('Row: ' + str(i+1) + ' ', 'index: ' + str(index) + ' ','word: '+ word))
                     start_i += index + len(word)
                 else:
                     done = True
@@ -31,7 +31,7 @@ def search_word_and_x(file, words, length_x):
                     if len(file[i][start_i:]) < length_x:
                         part_1 = file[i][start_i:]
                         dif = length_x - len(file[i][start_i:])
-                        part_2 = file[i+1][0 if dif == 0 else 0:dif+1]
+                        part_2 = file[i+1][0 if dif == 0 else 0:dif]
                         following_word = part_1 + part_2
                         row = i
                     elif len(file[i][start_i:start_i+length_x]) == 0:
@@ -40,7 +40,9 @@ def search_word_and_x(file, words, length_x):
                     else:
                         following_word = file[i][start_i:start_i + length_x]
                         row = i
-                    indices.append(('Row:' + str(row+1) + ' ', 'index: '+ str(index) + ' ', 'word: ' + word + ' ', 'following word : '+following_word + ' '))
+                    if '\n' in word:
+                        word = word.rstrip('\n')
+                    indices.append(('Row:' + str(row+1) + ' ', 'index: '+ str(index) + ' ', 'word: ' + word + ' ', 'following word : '+following_word))
                 else:
                     done = True
     return indices
@@ -71,7 +73,7 @@ def search_word_and_x_string(string, words, length_x):
             if word in string[start_i:]:
                 index = string.find(word, start_i)
                 start_i += index + len(word)
-                indices.append(('index: ' + str(index) + ' ','word: ' + word + ' ', 'following word : ' + string[start_i:start_i + length_x] + ' '))
+                indices.append(('index: ' + str(index) + ' ','word: ' + word + ' ', 'following word : ' + string[start_i:start_i + length_x]))
             else:
                 done = True
     return indices
